@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cérebro em Movimento - Ginástica do Cérebro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../assets/brand.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'ClashDisplay';
+            src: url('../assets/font/clash/WEB/fonts/ClashDisplay-Bold.woff2') format('woff2'),
+                url('../assets/font/clash/WEB/fonts/ClashDisplay-Bold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'ClashDisplay';
+            src: url('../assets/font/clash/WEB/fonts/ClashDisplay-Semibold.woff2') format('woff2'),
+                url('../assets/font/clash/WEB/fonts/ClashDisplay-Semibold.woff') format('woff');
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'ClashDisplay';
+            src: url('../assets/font/clash/WEB/fonts/ClashDisplay-Medium.woff2') format('woff2'),
+                url('../assets/font/clash/WEB/fonts/ClashDisplay-Medium.woff') format('woff');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: var(--gc-preto);
+            gap: 24px;
+            padding: 40px;
+        }
+
+        .download-btn {
+            background: var(--gc-laranja);
+            color: var(--gc-branco-puro);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .download-btn:hover {
+            background: var(--gc-laranja-hover);
+            transform: translateY(-2px);
+        }
+
+        .card {
+            width: var(--card-width);
+            height: var(--card-height);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .bg-image {
+            position: absolute;
+            inset: 0;
+            background: url('img/cerebro-movimento.jpeg') center 200% / cover no-repeat;
+            z-index: 1;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(var(--gc-verde-rgb), 0.2) 0%,
+                    rgba(var(--gc-verde-rgb), 0.05) 20%,
+                    rgba(var(--gc-verde-rgb), 0.4) 50%,
+                    rgba(var(--gc-verde-rgb), 0.92) 75%,
+                    rgba(var(--gc-verde-rgb), 1) 100%);
+            z-index: 2;
+        }
+
+        .logo {
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            z-index: 20;
+
+            transform: scale(2.0);
+            transform-origin: top right;
+        }
+
+        .quote-mark {
+            position: absolute;
+            top: 38px;
+            left: var(--spacing-card-padding);
+            z-index: 20;
+            font-family: var(--font-display);
+            font-size: var(--title-lg);
+            font-weight: 900;
+            color: var(--gc-amarelo);
+            line-height: 1;
+        }
+
+        .support-text {
+            position: absolute;
+            top: 120px;
+            left: var(--spacing-card-padding);
+            z-index: 20;
+            font-family: var(--font-body);
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--gc-branco-puro);
+            text-transform: uppercase;
+            line-height: 1.5;
+            letter-spacing: 0.5px;
+            max-width: 500px;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .support-text .highlight {
+            color: var(--gc-amarelo);
+        }
+
+        .title-block {
+            position: absolute;
+            bottom: 280px;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .title-line {
+            display: inline-block;
+            padding: 12px 32px;
+            transform-origin: center center;
+            border-radius: 2px;
+        }
+
+        .title-line span {
+            font-family: var(--font-display);
+            line-height: 1;
+        }
+
+        .tarja-amarelo {
+            background: var(--gc-amarelo);
+        }
+
+        .tarja-amarelo span {
+            color: var(--gc-verde);
+            font-weight: 600;
+            font-size: var(--title-lg);
+        }
+
+        .tarja-verde {
+            background: var(--gc-verde);
+        }
+
+        .tarja-verde span {
+            color: var(--gc-azul-claro);
+            font-weight: 500;
+            font-size: var(--title-md);
+        }
+
+        .tarja-laranja {
+            background: var(--gc-laranja);
+            padding: 18px 48px;
+        }
+
+        .tarja-laranja span {
+            color: var(--gc-branco-puro);
+            font-weight: 700;
+            font-size: var(--title-xl);
+            letter-spacing: -1px;
+            text-transform: lowercase;
+        }
+
+        .body-text {
+            position: absolute;
+            bottom: 120px;
+            left: var(--spacing-card-padding);
+            right: var(--spacing-card-padding);
+            z-index: 20;
+            font-family: var(--font-body);
+            font-size: 30px;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.7;
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .body-text strong {
+            color: var(--gc-amarelo);
+            font-weight: 800;
+        }
+
+        .whatsapp-bar {
+            position: absolute;
+            bottom: var(--spacing-card-top);
+            left: var(--spacing-card-padding);
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--gc-verde);
+            border: 1.5px solid rgba(172, 228, 227, 0.25);
+            padding: 12px 24px;
+            border-radius: 50px;
+        }
+
+        .wpp-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--wpp-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wpp-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--gc-branco-puro);
+        }
+
+        .wpp-number {
+            font-family: var(--font-body);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--gc-branco-puro);
+        }
+
+        .handle {
+            position: absolute;
+            bottom: 52px;
+            right: var(--spacing-card-padding);
+            z-index: 20;
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="download-btn" onclick="downloadPNG()">⬇ Baixar como PNG (1080x1320)</button>
+
+    <div class="card" id="card">
+        <div class="bg-image"></div>
+        <div class="overlay"></div>
+
+        <div class="logo">
+            <img src="../assets/GC/logo-vertical-branca.png" alt="Ginástica do Cérebro" height="200">
+        </div>
+
+        <div class="quote-mark">❝</div>
+
+        <div class="support-text">
+            Uma mesa <span class="highlight">diferentes gerações</span>
+        </div>
+
+        <div class="title-block">
+            <div class="title-row">
+                <div class="title-line tarja-amarelo" style="transform: rotate(-1.2deg)">
+                    <span>No fim, todo cérebro</span>
+                </div>
+            </div>
+            <div class="title-row">
+                <div class="title-line tarja-verde" style="transform: rotate(0.8deg)">
+                    <span>continua precisando</span>
+                </div>
+            </div>
+            <div class="title-line tarja-laranja" style="transform: rotate(-0.4deg)">
+                <span>de movimento.</span>
+            </div>
+        </div>
+
+        <div class="body-text">
+            Diferentes gerações compartilhando a mesma mesa, os mesmos desafios e as mesmas risadas.
+            <strong>Estimular a mente não tem idade.</strong>
+        </div>
+
+        <div class="whatsapp-bar">
+            <div class="wpp-icon">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                    <path
+                        d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492l4.625-1.476A11.929 11.929 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-2.168 0-4.19-.587-5.932-1.61l-.425-.253-2.742.876.876-2.688-.278-.442A9.776 9.776 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818 5.418 0 9.818 4.4 9.818 9.818 0 5.418-4.4 9.818-9.818 9.818z" />
+                </svg>
+            </div>
+            <span class="wpp-number">(65) 99326-7171</span>
+        </div>
+
+        <div class="handle">@gccuiaba.alvorada</div>
+    </div>
+
+    <script>
+        function downloadPNG() {
+            const card = document.getElementById('card');
+            html2canvas(card, {
+                width: 1080,
+                height: 1320,
+                scale: 1,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'cerebro-movimento-gc.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taco Gato - Empório Lúdico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../assets/emporio-brand.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #1a1a1a;
+            gap: 24px;
+            padding: 40px;
+        }
+
+        .download-btn {
+            background: var(--el-dourado);
+            color: var(--el-azul-escuro);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-family: sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .download-btn:hover {
+            background: var(--el-laranja);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .card {
+            width: var(--card-width);
+            height: var(--card-height);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #FFFFFF;
+        }
+
+        /* Noise texture */
+        .noise-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            pointer-events: none;
+            opacity: 0.06;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 300px 300px;
+        }
+
+        /* Pattern strip no fundo */
+        .pattern-strip {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 25%;
+            z-index: 2;
+            background-image: url('../assets/emporio/pattern.png');
+            background-repeat: repeat-x;
+            background-position: top left;
+            background-size: auto 100%;
+            transform: translateY(75%);
+            pointer-events: none;
+        }
+
+        /* Gradiente de fundo */
+        .bg-gradient {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: radial-gradient(ellipse at 70% 40%, rgba(233, 183, 62, 0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 30% 80%, rgba(237, 140, 63, 0.08) 0%, transparent 50%);
+        }
+
+        /* Logo */
+        .logo {
+            position: absolute;
+            top: 38px;
+            right: 42px;
+            z-index: 10;
+        }
+
+        .logo img {
+            height: 62px;
+            width: auto;
+        }
+
+        /* Produto — caixa principal, encostado à direita com borda tipo caixa */
+        .product-box {
+            position: absolute;
+            top: 30%;
+            right: 0;
+            transform: translateY(-30%);
+            z-index: 10;
+            background: #FFFFFF;
+            border-left: 4px solid rgba(12, 33, 54, 0.1);
+            border-top: 4px solid rgba(12, 33, 54, 0.1);
+            border-bottom: 4px solid rgba(12, 33, 54, 0.1);
+            border-right: none;
+            border-radius: 12px 0 0 12px;
+            padding: 0;
+            box-shadow: -10px 20px 50px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .product-box img {
+            height: 650px;
+            width: auto;
+            display: block;
+            mix-blend-mode: multiply;
+        }
+
+        /* Cartas flutuando */
+        .cards-float {
+            position: absolute;
+            z-index: 8;
+        }
+
+        .card-1 {
+            top: 80px;
+            left: 60px;
+            transform: rotate(-12deg);
+        }
+
+        .card-2 {
+            top: 220px;
+            left: 280px;
+            transform: rotate(8deg);
+        }
+
+        .card-3 {
+            top: 340px;
+            left: 100px;
+            transform: rotate(-5deg);
+        }
+
+        .cards-float img {
+            height: 180px;
+            width: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Título */
+        .title-block {
+            position: absolute;
+            top: 520px;
+            left: 48px;
+            right: 500px;
+            z-index: 12;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .tarja {
+            display: inline-block;
+            padding: 12px 24px 10px;
+            border-radius: 2px;
+            width: fit-content;
+        }
+
+        .tarja span {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -0.6px;
+        }
+
+        .tarja-dourado {
+            background: var(--el-dourado);
+            transform: rotate(-0.5deg);
+        }
+
+        .tarja-dourado span {
+            color: var(--el-azul-escuro);
+            font-size: 44px;
+        }
+
+        .tarja-laranja {
+            background: var(--el-laranja);
+            transform: rotate(0.3deg);
+            margin-left: 16px;
+            padding: 14px 28px 12px;
+        }
+
+        .tarja-laranja span {
+            color: #FFFFFF;
+            font-size: 52px;
+        }
+
+        /* Descrição */
+        .description {
+            position: absolute;
+            top: 680px;
+            left: 48px;
+            right: 500px;
+            z-index: 10;
+            font-family: var(--font-body);
+            font-size: 26px;
+            color: rgba(12, 33, 54, 0.7);
+            line-height: 1.6;
+            max-width: 520px;
+        }
+
+        .description strong {
+            color: var(--el-laranja);
+            font-weight: 700;
+        }
+
+        /* Info chips */
+        .info-chips {
+            position: absolute;
+            top: 860px;
+            left: 48px;
+            right: 500px;
+            z-index: 10;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .chip {
+            background: rgba(12, 33, 54, 0.06);
+            border: 1px solid rgba(12, 33, 54, 0.12);
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-family: var(--font-body);
+            font-size: 18px;
+            color: rgba(12, 33, 54, 0.6);
+        }
+
+        .chip strong {
+            color: var(--el-azul-escuro);
+            font-weight: 700;
+        }
+
+        /* Preço */
+        .price-block {
+            position: absolute;
+            bottom: 200px;
+            left: 48px;
+            z-index: 10;
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .price-label {
+            font-family: var(--font-body);
+            font-size: 22px;
+            color: rgba(12, 33, 54, 0.4);
+        }
+
+        .price-value {
+            font-family: var(--font-display);
+            font-size: 72px;
+            font-weight: 700;
+            color: var(--el-azul-escuro);
+            letter-spacing: -1px;
+        }
+
+        .price-cents {
+            font-size: 36px;
+            font-weight: 500;
+        }
+
+        /* CTA */
+        .cta {
+            position: absolute;
+            bottom: 200px;
+            right: 48px;
+            z-index: 10;
+            background: var(--el-laranja);
+            padding: 18px 36px;
+            border-radius: 6px;
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Handle */
+        .handle {
+            position: absolute;
+            bottom: 120px;
+            left: 50px;
+            z-index: 10;
+            font-family: var(--font-body);
+            font-size: 17px;
+            letter-spacing: 1.5px;
+            color: rgba(12, 33, 54, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="download-btn" onclick="downloadPNG()">⬇ Baixar PNG</button>
+
+    <div class="card" id="card">
+
+        <!-- Noise -->
+        <div class="noise-overlay"></div>
+
+        <!-- Gradiente decorativo -->
+        <div class="bg-gradient"></div>
+
+        <!-- Pattern -->
+        <div class="pattern-strip"></div>
+
+        <!-- Logo -->
+        <div class="logo">
+            <img src="../assets/emporio/icone.svg" alt="Empório Lúdico">
+        </div>
+
+        <!-- Produto principal -->
+        <div class="product-box">
+            <img src="img/taco-gato-caixa.png" alt="Taco Gato Cabra Queijo Pizza">
+        </div>
+
+        <!-- Cartas flutuando -->
+        <div class="cards-float card-1">
+            <img src="img/taco-gato-carta-1.png" alt="Carta">
+        </div>
+        <div class="cards-float card-2">
+            <img src="img/taco-gato-carta-2.png" alt="Carta">
+        </div>
+        <div class="cards-float card-3">
+            <img src="img/taco-gato-carta-3.png" alt="Carta">
+        </div>
+
+        <!-- Título -->
+        <div class="title-block">
+            <div class="tarja tarja-dourado">
+                <span>Taco Gato Cabra</span>
+            </div>
+            <div class="tarja tarja-laranja">
+                <span>Queijo Pizza</span>
+            </div>
+        </div>
+
+        <!-- Descrição -->
+        <div class="description">
+            Jogue uma carta enquanto fala uma das palavras. Coincidiu? <strong>Corra para bater na pilha!</strong> O
+            último pega tudo.
+        </div>
+
+        <!-- Info chips -->
+        <div class="info-chips">
+            <div class="chip"><strong>2–8</strong> jogadores</div>
+            <div class="chip"><strong>10 min</strong></div>
+            <div class="chip"><strong>6+</strong> anos</div>
+            <div class="chip">Jogo de Festa</div>
+        </div>
+
+        <!-- Preço -->
+        <div class="price-block">
+            <span class="price-value">R$ 74<span class="price-cents">,90</span></span>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta">Disponível</div>
+
+        <!-- Handle -->
+        <div class="handle">@emporioludicocba</div>
+    </div>
+
+    <script>
+        function downloadPNG() {
+            const card = document.getElementById('card');
+            html2canvas(card, {
+                width: 1080,
+                height: 1320,
+                scale: 1,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'taco-gato-emporio-ludico.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+</body>
+
+</html>

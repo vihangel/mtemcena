@@ -1,0 +1,47 @@
+/* ============================================
+   EMPÓRIO LÚDICO — Sistema de Marca
+   Variáveis CSS + Tokens de Design
+   ============================================ */
+
+:root {
+    /* ─── Cores Primárias ─── */
+    --el-azul-escuro: #0C2136;
+    --el-azul-escuro-rgb: 12, 33, 54;
+
+    --el-dourado: #E9B73E;
+    --el-laranja: #ED8C3F;
+
+    /* ─── Cores Secundárias ─── */
+    --el-coral: #EA605D;
+    --el-turquesa: #4BB0B8;
+    --el-verde: #6FA260;
+
+    /* ─── Neutros ─── */
+    --el-branco: #FFFFFF;
+    --el-branco-quente: #FBF9F4;
+    --el-preto: #1a1a1a;
+
+    /* ─── Tipografia ─── */
+    --font-logo: 'Mason Serif OT', serif;       /* Logo (adaptada) */
+    --font-display: 'Cinzel', serif;            /* Títulos e cabeçalhos */
+    --font-body: 'Cardo', serif;                /* Corpo de texto */
+
+    /* ─── Tamanhos de Título ─── */
+    --title-xl: 96px;
+    --title-lg: 56px;
+    --title-md: 36px;
+    --title-sm: 22px;
+
+    /* ─── Tamanhos de Corpo ─── */
+    --body-lg: 20px;
+    --body-md: 18px;
+    --body-sm: 14px;
+
+    /* ─── Espaçamentos ─── */
+    --spacing-card-padding: 50px;
+    --spacing-card-top: 44px;
+
+    /* ─── Card Instagram ─── */
+    --card-width: 1080px;
+    --card-height: 1320px;
+}

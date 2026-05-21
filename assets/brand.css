@@ -1,0 +1,57 @@
+/* ============================================
+   GINÁSTICA DO CÉREBRO — Sistema de Marca
+   Variáveis CSS + Tokens de Design
+   ============================================ */
+
+:root {
+    /* ─── Cores Primárias ─── */
+    --gc-laranja: #FF8340;
+    --gc-laranja-hover: #e06b28;
+    --gc-laranja-gradient-start: #FF8340;
+    --gc-laranja-gradient-end: #FB6D2C;
+
+    --gc-verde: #003E29;
+    --gc-verde-rgb: 0, 62, 41;
+
+    --gc-amarelo: #FBBD1E;
+
+    /* ─── Cores Secundárias ─── */
+    --gc-azul-claro: #ACE4E3;
+    --gc-rosa-claro: #FFA8A7;
+    --gc-dourado: #E2AB51;
+
+    /* ─── Neutros ─── */
+    --gc-branco: #FBFBF8;
+    --gc-branco-puro: #FFFFFF;
+    --gc-preto: #1a1a1a;
+
+    /* ─── Tipografia ─── */
+    --font-display: 'ClashDisplay', sans-serif;
+    --font-body: 'Nunito Sans', sans-serif;
+
+    /* ─── Tamanhos de Título ─── */
+    --title-xl: 120px;
+    --title-lg: 68px;
+    --title-md: 48px;
+    --title-sm: 22px;
+
+    /* ─── Tamanhos de Corpo ─── */
+    --body-lg: 20px;
+    --body-md: 18px;
+    --body-sm: 14px;
+
+    /* ─── Espaçamentos ─── */
+    --spacing-card-padding: 50px;
+    --spacing-card-top: 44px;
+
+    /* ─── Card ─── */
+    --card-width: 1080px;
+    --card-height: 1320px;
+
+    /* ─── WhatsApp ─── */
+    --wpp-green: #25D366;
+    --wpp-number: '(65) 99326-7171';
+
+    /* ─── Social ─── */
+    --gc-handle: '@gccuiaba.alvorada';
+}

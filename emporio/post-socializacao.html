@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socialização - Empório Lúdico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../assets/emporio-brand.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #1a1a1a;
+            gap: 24px;
+            padding: 40px;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            background: var(--el-dourado);
+            color: var(--el-azul-escuro);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-family: sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .download-btn:hover {
+            background: var(--el-laranja);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .search-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .search-group label {
+            color: #aaa;
+            font-size: 12px;
+            font-family: sans-serif;
+        }
+
+        .search-group input {
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background: #222;
+            color: #fff;
+            font-size: 13px;
+            width: 200px;
+            font-family: sans-serif;
+        }
+
+        .search-group button {
+            padding: 10px 16px;
+            border-radius: 6px;
+            border: none;
+            background: #4BB0B8;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .card {
+            width: var(--card-width);
+            height: var(--card-height);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #FFFFFF;
+        }
+
+        /* Noise/textura — background CSS, acima de TUDO, compatível com html2canvas */
+        .noise-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            pointer-events: none;
+            opacity: 0.08;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 300px 300px;
+        }
+
+        /* pattern no final, repetindo para o lado, translateY 75% para baixo */
+        .pattern-strip {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 25%;
+            z-index: 5;
+            background-image: url('../assets/emporio/pattern.png');
+            background-repeat: repeat-x;
+            background-position: top left;
+            background-size: auto 100%;
+            transform: translateY(75%);
+            pointer-events: none;
+        }
+
+        /* imagem expandida, cobrindo todo o card */
+        .photo-block {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+        }
+
+        .photo-block img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: saturate(1.05) contrast(1.05);
+        }
+
+        /* gradiente da esquerda para direita */
+        .photo-block::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg,
+                    rgba(12, 33, 54, 1) 0%,
+                    rgba(12, 33, 54, 0.92) 15%,
+                    rgba(12, 33, 54, 0.6) 35%,
+                    rgba(12, 33, 54, 0.25) 55%,
+                    rgba(12, 33, 54, 0) 75%);
+            z-index: 4;
+        }
+
+        /* logo canto direito superior */
+        .logo {
+            position: absolute;
+            top: 38px;
+            right: 42px;
+            z-index: 10;
+        }
+
+        .logo img {
+            height: 62px;
+            width: auto;
+        }
+
+        /* título à esquerda */
+        .title-block {
+            position: absolute;
+            top: 52%;
+            left: 48px;
+            transform: translateY(-50%);
+            z-index: 12;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .tarja {
+            display: inline-block;
+            padding: 12px 24px 10px;
+            border-radius: 2px;
+            width: fit-content;
+        }
+
+        .tarja span {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -0.6px;
+        }
+
+        .tarja-1 {
+            background: var(--el-azul-escuro);
+            transform: rotate(-0.5deg);
+        }
+
+        .tarja-1 span {
+            color: #FFFFFF;
+            font-size: 48px;
+        }
+
+        .tarja-2 {
+            background: var(--el-dourado);
+            transform: rotate(0.4deg);
+            margin-left: 22px;
+        }
+
+        .tarja-2 span {
+            color: var(--el-azul-escuro);
+            font-size: 48px;
+        }
+
+        .tarja-3 {
+            background: var(--el-laranja);
+            transform: rotate(-0.3deg);
+            margin-left: 0;
+            padding: 14px 28px 12px;
+        }
+
+        .tarja-3 span {
+            color: #FFFFFF;
+            font-size: 58px;
+        }
+
+        /* subtítulo */
+        .sub-text {
+            margin-top: 26px;
+            margin-left: 2px;
+            font-family: var(--font-body);
+            font-size: 25px;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.45;
+            max-width: 440px;
+        }
+
+        /* @ */
+        .handle {
+            position: absolute;
+            bottom: 100px;
+            left: 50px;
+            z-index: 10;
+            font-family: var(--font-body);
+            font-size: 17px;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.45);
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="download-btn" onclick="downloadPNG()">⬇ Baixar PNG</button>
+
+    <div class="card" id="card">
+
+        <!-- Noise overlay -->
+        <div class="noise-overlay"></div>
+
+        <!-- Pattern -->
+        <div class="pattern-strip"></div>
+
+        <!-- Foto de fundo -->
+        <div class="photo-block">
+            <img id="bg-photo" src="https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=1200&q=80"
+                alt="Jogo de tabuleiro" crossorigin="anonymous">
+        </div>
+
+        <!-- Logo canto superior direito -->
+        <div class="logo">
+            <img src="../assets/emporio/icone.svg" alt="Empório Lúdico">
+        </div>
+
+        <!-- Título + subtexto -->
+        <div class="title-block">
+            <div class="tarja tarja-1">
+                <span>Tem amizades</span>
+            </div>
+            <div class="tarja tarja-2">
+                <span>que começam</span>
+            </div>
+            <div class="tarja tarja-3">
+                <span>jogando.</span>
+            </div>
+            <div class="sub-text">
+                Falta apenas um "vamos jogar?"
+            </div>
+        </div>
+
+        <!-- Handle -->
+        <div class="handle">@emporioludicocba</div>
+    </div>
+
+    <script>
+        function downloadPNG() {
+            const card = document.getElementById('card');
+            html2canvas(card, {
+                width: 1080,
+                height: 1320,
+                scale: 1,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'socializacao-emporio-ludico.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+</body>
+
+</html>
