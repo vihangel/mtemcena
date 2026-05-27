@@ -1,0 +1,324 @@
+@font-face {
+    font-family: 'ClashDisplay';
+    src: url('../assets/font/clash/WEB/fonts/ClashDisplay-Bold.woff2') format('woff2'),
+        url('../assets/font/clash/WEB/fonts/ClashDisplay-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ClashDisplay';
+    src: url('../assets/font/clash/WEB/fonts/ClashDisplay-Semibold.woff2') format('woff2'),
+        url('../assets/font/clash/WEB/fonts/ClashDisplay-Semibold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ClashDisplay';
+    src: url('../assets/font/clash/WEB/fonts/ClashDisplay-Medium.woff2') format('woff2'),
+        url('../assets/font/clash/WEB/fonts/ClashDisplay-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #1a1a1a;
+    gap: 24px;
+    padding: 40px;
+}
+
+.download-btn {
+    background: #FF8340;
+    color: #fff;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.download-btn:hover {
+    background: #e06b28;
+    transform: translateY(-2px);
+}
+
+.card {
+    width: 1080px;
+    height: 1320px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #003E29;
+}
+
+.bg-image {
+    position: absolute;
+    inset: 0;
+    background:
+        url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1400&q=80') center center / cover no-repeat;
+    z-index: 1;
+    filter: saturate(0.92) contrast(1.04);
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg,
+            rgba(0, 62, 41, 0.20) 0%,
+            rgba(0, 62, 41, 0.40) 35%,
+            rgba(0, 62, 41, 0.86) 68%,
+            rgba(0, 62, 41, 1) 100%),
+        radial-gradient(circle at 78% 18%, rgba(251, 189, 30, 0.20), transparent 28%),
+        radial-gradient(circle at 15% 82%, rgba(255, 131, 64, 0.22), transparent 30%);
+    z-index: 2;
+}
+
+.logo {
+    position: absolute;
+    top: 44px;
+    right: 50px;
+    z-index: 20;
+}
+
+.quote-mark {
+    position: absolute;
+    top: 38px;
+    left: 50px;
+    z-index: 20;
+    font-family: 'ClashDisplay', sans-serif;
+    font-size: 68px;
+    font-weight: 900;
+    color: #FBBD1E;
+    line-height: 1;
+}
+
+.support-text {
+    position: absolute;
+    top: 120px;
+    left: 50px;
+    z-index: 20;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1.5;
+    letter-spacing: 0.6px;
+    max-width: 650px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+.support-text .highlight {
+    color: #FBBD1E;
+}
+
+.title-block {
+    position: absolute;
+    bottom: 430px;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.title-line {
+    display: inline-block;
+    padding: 12px 32px;
+    transform-origin: center center;
+    border-radius: 2px;
+}
+
+.title-line span {
+    font-family: 'ClashDisplay', sans-serif;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.title-line-1 {
+    background: #FBBD1E;
+    transform: rotate(-1.2deg);
+}
+
+.title-line-1 span {
+    font-weight: 700;
+    font-size: 72px;
+    color: #003E29;
+    text-transform: uppercase;
+}
+
+.title-line-2 {
+    background: #003E29;
+    transform: rotate(0.8deg);
+    border: 1.5px solid rgba(172, 228, 227, 0.35);
+}
+
+.title-line-2 span {
+    font-weight: 600;
+    font-size: 62px;
+    color: #ACE4E3;
+    text-transform: uppercase;
+}
+
+.title-line-3 {
+    background: #FF8340;
+    transform: rotate(-0.4deg);
+    padding: 18px 48px;
+}
+
+.title-line-3 span {
+    font-weight: 700;
+    font-size: 112px;
+    color: #fff;
+    text-transform: lowercase;
+}
+
+.subtitle-line {
+    margin-top: 22px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 21px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 7px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.info-card {
+    position: absolute;
+    bottom: 150px;
+    left: 50px;
+    right: 50px;
+    z-index: 20;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.info-box {
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 28px;
+    padding: 26px 30px;
+    min-height: 150px;
+    font-family: 'Nunito Sans', sans-serif;
+    color: #003E29;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.20);
+}
+
+.info-box.big {
+    grid-column: 1 / -1;
+    min-height: 128px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 22px;
+}
+
+.info-label {
+    font-size: 17px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #FF8340;
+    letter-spacing: 0.7px;
+    margin-bottom: 8px;
+}
+
+.info-title {
+    font-size: 32px;
+    line-height: 1.12;
+    font-weight: 900;
+}
+
+.info-text {
+    margin-top: 8px;
+    font-size: 19px;
+    line-height: 1.35;
+    font-weight: 700;
+    color: rgba(0, 62, 41, 0.86);
+}
+
+.salary-main {
+    font-family: 'ClashDisplay', sans-serif;
+    font-size: 54px;
+    line-height: 1;
+    font-weight: 700;
+    color: #003E29;
+}
+
+.salary-note {
+    font-size: 20px;
+    line-height: 1.35;
+    font-weight: 800;
+    color: rgba(0, 62, 41, 0.78);
+    max-width: 420px;
+}
+
+.salary-note strong {
+    color: #FF8340;
+}
+
+.whatsapp-bar {
+    position: absolute;
+    bottom: 44px;
+    left: 50px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #003E29;
+    border: 1.5px solid rgba(172, 228, 227, 0.35);
+    padding: 12px 24px;
+    border-radius: 50px;
+}
+
+.wpp-icon {
+    width: 30px;
+    height: 30px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wpp-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: #fff;
+}
+
+.wpp-number {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.handle {
+    position: absolute;
+    bottom: 52px;
+    right: 50px;
+    z-index: 20;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+}

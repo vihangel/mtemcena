@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaga Comercial - Ginástica do Cérebro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Nunito:wght@700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'ClashDisplay';
+            src: url('../assets/font/clash/WEB/fonts/ClashDisplay-Bold.woff2') format('woff2'),
+                url('../assets/font/clash/WEB/fonts/ClashDisplay-Bold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'ClashDisplay';
+            src: url('../assets/font/clash/WEB/fonts/ClashDisplay-Semibold.woff2') format('woff2'),
+                url('../assets/font/clash/WEB/fonts/ClashDisplay-Semibold.woff') format('woff');
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'ClashDisplay';
+            src: url('../assets/font/clash/WEB/fonts/ClashDisplay-Medium.woff2') format('woff2'),
+                url('../assets/font/clash/WEB/fonts/ClashDisplay-Medium.woff') format('woff');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #1a1a1a;
+            gap: 24px;
+            padding: 40px;
+        }
+
+        .download-btn {
+            background: #FF8340;
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .download-btn:hover {
+            background: #e06b28;
+            transform: translateY(-2px);
+        }
+
+        .card {
+            width: 1080px;
+            height: 1320px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #003E29;
+        }
+
+        .bg-image {
+            position: absolute;
+            inset: 0;
+            background:
+                url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1400&q=80') center center / cover no-repeat;
+            z-index: 1;
+            filter: saturate(0.92) contrast(1.04);
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg,
+                    rgba(0, 62, 41, 0.20) 0%,
+                    rgba(0, 62, 41, 0.40) 35%,
+                    rgba(0, 62, 41, 0.86) 68%,
+                    rgba(0, 62, 41, 1) 100%),
+                radial-gradient(circle at 78% 18%, rgba(251, 189, 30, 0.20), transparent 28%),
+                radial-gradient(circle at 15% 82%, rgba(255, 131, 64, 0.22), transparent 30%);
+            z-index: 2;
+        }
+
+        .logo {
+            position: absolute;
+            top: 44px;
+            right: 50px;
+            z-index: 20;
+        }
+
+        .quote-mark {
+            position: absolute;
+            top: 38px;
+            left: 50px;
+            z-index: 20;
+            font-family: 'ClashDisplay', sans-serif;
+            font-size: 68px;
+            font-weight: 900;
+            color: #FBBD1E;
+            line-height: 1;
+        }
+
+        .support-text {
+            position: absolute;
+            top: 120px;
+            left: 50px;
+            z-index: 20;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 1.5;
+            letter-spacing: 0.6px;
+            max-width: 650px;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+        }
+
+        .support-text .highlight {
+            color: #FBBD1E;
+        }
+
+        .title-block {
+            position: absolute;
+            bottom: 630px;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .title-line {
+            display: inline-block;
+            padding: 12px 32px;
+            transform-origin: center center;
+            border-radius: 2px;
+        }
+
+        .title-line span {
+            font-family: 'ClashDisplay', sans-serif;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+
+        .title-line-1 {
+            background: #FBBD1E;
+            transform: rotate(-1.2deg);
+        }
+
+        .title-line-1 span {
+            font-weight: 700;
+            font-size: 72px;
+            color: #003E29;
+            text-transform: uppercase;
+        }
+
+        .title-line-2 {
+            background: #003E29;
+            transform: rotate(0.8deg);
+            border: 1.5px solid rgba(172, 228, 227, 0.35);
+        }
+
+        .title-line-2 span {
+            font-weight: 600;
+            font-size: 62px;
+            color: #ACE4E3;
+            text-transform: uppercase;
+        }
+
+        .title-line-3 {
+            background: #FF8340;
+            transform: rotate(-0.4deg);
+            padding: 18px 48px;
+        }
+
+        .title-line-3 span {
+            font-weight: 700;
+            font-size: 112px;
+            color: #fff;
+            text-transform: lowercase;
+        }
+
+        .subtitle-line {
+            margin-top: 22px;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 21px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: 7px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .info-card {
+            position: absolute;
+            bottom: 150px;
+            left: 50px;
+            right: 50px;
+            z-index: 20;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.94);
+            border-radius: 28px;
+            padding: 26px 30px;
+            min-height: 150px;
+            font-family: 'Nunito Sans', sans-serif;
+            color: #003E29;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.20);
+        }
+
+        .info-box.big {
+            grid-column: 1 / -1;
+            min-height: 128px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .info-label {
+            font-size: 17px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #FF8340;
+            letter-spacing: 0.7px;
+            margin-bottom: 8px;
+        }
+
+        .info-title {
+            font-size: 32px;
+            line-height: 1.12;
+            font-weight: 900;
+        }
+
+        .info-text {
+            margin-top: 8px;
+            font-size: 19px;
+            line-height: 1.35;
+            font-weight: 700;
+            color: rgba(0, 62, 41, 0.86);
+        }
+
+        .salary-main {
+            font-family: 'ClashDisplay', sans-serif;
+            font-size: 54px;
+            line-height: 1;
+            font-weight: 700;
+            color: #003E29;
+        }
+
+        .salary-note {
+            font-size: 20px;
+            line-height: 1.35;
+            font-weight: 800;
+            color: rgba(0, 62, 41, 0.78);
+            max-width: 420px;
+        }
+
+        .salary-note strong {
+            color: #FF8340;
+        }
+
+        .whatsapp-bar {
+            position: absolute;
+            bottom: 44px;
+            left: 50px;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #003E29;
+            border: 1.5px solid rgba(172, 228, 227, 0.35);
+            padding: 12px 24px;
+            border-radius: 50px;
+        }
+
+        .wpp-icon {
+            width: 30px;
+            height: 30px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wpp-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: #fff;
+        }
+
+        .wpp-number {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .handle {
+            position: absolute;
+            bottom: 52px;
+            right: 50px;
+            z-index: 20;
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="download-btn" onclick="downloadPNG()">⬇ Baixar como PNG (1080x1320)</button>
+
+    <div class="card" id="card">
+        <div class="bg-image"></div>
+        <div class="overlay"></div>
+
+        <div class="logo">
+            <svg viewBox="0 0 1573.41 1789.61" width="56" height="64">
+                <defs>
+                    <linearGradient id="d" x1="0" y1="733.88" x2="1573.41" y2="733.88" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="#ff8340" />
+                        <stop offset="1" stop-color="#fb6d2c" />
+                    </linearGradient>
+                    <linearGradient id="e" x1="314.82" y1="1696.96" x2="1260.53" y2="1696.96"
+                        gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="#ff8340" />
+                        <stop offset="1" stop-color="#fb6d2c" />
+                    </linearGradient>
+                </defs>
+                <path
+                    d="M316.42,5.88c257.11-52.49,357.06,258.66,405.51,450.04,10.83,42.77,5.84,154.97,67.5,155.02,58.02.04,58.96-145.73,72.21-195.72,159.45-601.86,582.41-507.98,686.98,52.03,44.54,238.54,33.9,544.75-71.89,766.9-182.99,384.28-477.12,252.64-591.36-92.32-23.76-71.74-29.48-184.03-53.51-240.94-13.71-32.47-47.68-51.23-77.48-26.66-19.33,15.94-51.57,219.82-69.25,270.44-91.94,263.22-331.38,478.22-538.04,169.2C-40.96,1032.65-43.41,503.81,109.54,206.69,145.66,136.52,235.82,22.33,316.42,5.88ZM531.82,623.36c32.81-33.34-13.49-188.82-42.49-229.28-93.12-129.89-238.84-78.08-300,50.93-88.14,185.93-90.1,739.73,214.15,701.08,200.85-25.51,334.47-410.58,58.82-382.74-54.13,5.47-139.58,33.75-86.28,95.28l158.71-5.97c22.08,111.21-131.27,281.04-234.36,188.97-46.61-41.63-81.32-232.75-83.23-296.09-2.48-82.55,38.31-408.32,174.32-333.14,86.8,47.98,44.3,160.51,69.43,202.55,12.28,20.55,53.43,26.17,70.93,8.4ZM1348.48,534.01c44.89-28.4-60.3-273.94-216.7-199.66-81.12,38.53-114.87,204.2-121.29,286.35-10.3,131.76,15.11,490.28,177.92,523.77,206.39,42.45,265.26-289.52,195.83-331.8-85.71-52.19-56.16,91.67-59.48,121.73-16.34,148.14-143.79,188.96-193.26,29.24-34.84-112.48-59.12-452.07,20.95-540.65,89.52-99.03,114.98,162.31,196.02,111.03Z"
+                    fill="url(#d)" />
+                <path
+                    d="M359.07,1604.6c24.55-.89,158.5,54.42,202.45,64.92,155.76,37.21,306.04,47.04,462.42,6.47,57.15-14.83,237.24-127.79,236.59-36.23-.44,61.58-151.82,109.95-205.02,124.42-170.43,46.36-563.47,32.67-712.57-68.52-46.46-31.53-31.34-89.33,16.13-91.06Z"
+                    fill="url(#e)" />
+            </svg>
+        </div>
+
+        <div class="quote-mark">❝</div>
+
+        <div class="support-text">
+            Cuiabá | vaga na área <span class="highlight">comercial</span>
+        </div>
+
+        <div class="title-block">
+            <div class="title-line title-line-1"><span>Estamos</span></div>
+            <div class="title-line title-line-2"><span>contratando</span></div>
+            <div class="title-line title-line-3"><span>comercial</span></div>
+            <div class="subtitle-line">Ginástica do Cérebro • Presencial</div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-box">
+                <div class="info-label">Perfil</div>
+                <div class="info-title">Comunicação e relacionamento</div>
+                <div class="info-text">Buscamos alguém proativo, organizado e com energia para gerar oportunidades.
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-label">Diferenciais</div>
+                <div class="info-title">Educação, vendas e atendimento</div>
+                <div class="info-text">Experiência comercial e interesse por desenvolvimento humano contam muito.</div>
+            </div>
+
+            <div class="info-box big">
+                <div>
+                    <div class="info-label">Remuneração</div>
+                    <div class="salary-main">até R$ 6 mil/mês</div>
+                </div>
+                <div class="salary-note">
+                    Fixo entre <strong>R$ 2.000 e R$ 2.500</strong> + variável por resultado.
+                </div>
+            </div>
+        </div>
+
+        <div class="whatsapp-bar">
+            <div class="wpp-icon">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                    <path
+                        d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492l4.625-1.476A11.929 11.929 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-2.168 0-4.19-.587-5.932-1.61l-.425-.253-2.742.876.876-2.688-.278-.442A9.776 9.776 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818 5.418 0 9.818 4.4 9.818 9.818 0 5.418-4.4 9.818-9.818 9.818z" />
+                </svg>
+            </div>
+            <span class="wpp-number">Envie currículo: (65) 99326-7171</span>
+        </div>
+
+        <div class="handle">@gccuiaba.alvorada</div>
+    </div>
+
+    <script>
+        function downloadPNG() {
+            const card = document.getElementById('card');
+            html2canvas(card, {
+                width: 1080,
+                height: 1320,
+                scale: 1,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'vaga-comercial-gc.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+</body>
+
+</html>
